@@ -2,6 +2,7 @@ package main
 
 import (
 	"go_jwt/controllers"
+	"go_jwt/controllers/dao"
 	"go_jwt/middlewares"
 
 	"github.com/gin-gonic/gin"
@@ -23,5 +24,6 @@ func main() {
 		protected.GET("/user", controllers.GetInfo)
 	}
 	config.Init()
+	dao.Init()
 	r.Run("0.0.0.0:8000")
 }

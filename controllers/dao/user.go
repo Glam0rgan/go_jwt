@@ -2,6 +2,7 @@ package dao
 
 import (
 	"errors"
+	"fmt"
 	"go_jwt/db"
 
 	"gorm.io/gorm"
@@ -11,8 +12,8 @@ var dbIns *gorm.DB
 
 type User struct {
 	Id       uint `gorm:"primary_key"`
-	UserName string
-	Password string
+	UserName string `gorm:"column:username"`
+	Password string `gorm:"column:password"`
 }
 
 func Init(){
@@ -35,6 +36,9 @@ func (u *User) Add() (userId uint, err error) {
 }
 
 func (u *User) CheckHaveUserName(userName string) (data User) {
-	dbIns.Where("username = ?", userName).Take(&data)
+	if err := dbIns.Where("username = ?", userName).Take(&data); err != nil {
+		fmt.Println("404 not found")
+		return
+	}
 	return
 }

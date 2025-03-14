@@ -1,0 +1,2 @@
+[mysql-base]
+address = "root:Bzt1453529.@tcp(127.0.0.1:3306)/go_jwt"
